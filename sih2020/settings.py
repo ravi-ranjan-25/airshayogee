@@ -25,7 +25,7 @@ SECRET_KEY = 'sri4o-xdyo($&4py_zpo^nk3zcagjlcq_v)0rpf1@8lwcdv@dr'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['airsahyog.herokuapp.com',]
 
 
 # Application definition
