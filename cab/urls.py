@@ -19,5 +19,5 @@ from cab import views
 urlpatterns = [
 # path('/user', , name = "userConsumptionN"),
     path('signup',views.signup , name = "signup"),
-   
+    path('login',views.login , name = "login"),
 ]
