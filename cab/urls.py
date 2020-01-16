@@ -20,4 +20,6 @@ urlpatterns = [
 # path('/user', , name = "userConsumptionN"),
     path('signup',views.signup , name = "signup"),
     path('login',views.login , name = "login"),
+    path('addmoney',views.paytmCall , name = "addmoney"),
+
 ]

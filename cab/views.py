@@ -1,9 +1,11 @@
 from django.shortcuts import render
-from cab.models import userMob
+from cab.models import userMob,Tax,wallet
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.utils import timezone
 from django.http import JsonResponse
+import random
+
 
 # Create your views here.
 def signup(request):
@@ -37,6 +39,10 @@ def signup(request):
         house_add.user = user1
         house_add.save()
 
+        Wallet = wallet()
+        Wallet.user = user1
+        Wallet.save()          
+
         # Return 1
         return JsonResponse({'result':1,'message':'success'})
 
@@ -54,4 +60,27 @@ def login(request):
                                 'lastname':user1.last_name,'mobile':house.mobile})
     
     else:
-        return JsonResponse({'result':0,'message':"Incorrect username or password"})
+        return JsonResponse({'result':0,'message':'Incorrect username or password'})
+
+def paytmCall(request):
+        username1 = request.GET.get('username')
+        am = request.GET.get('TXN_AMOUNT')
+
+        user1 = User.objects.get(username = username1)
+        
+        complaint = random.randint(100,999) + random.randint(9999,10000) + user1.pk
+    
+        txn = "TXN25"+str(complaint)
+        wall1 = wallet.objects.get(user=user1)
+        
+        
+        transaction = Tax(amount = am, txnid = txn)
+        wall1.amount = wall1.amount + float(am)
+        transaction.user = user1
+
+        transaction.credit = True
+        wall1.save()
+        transaction.save()
+        return JsonResponse({'result':1})
+
+    
