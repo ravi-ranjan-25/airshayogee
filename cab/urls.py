@@ -16,10 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from cab import views
+from rest_framework import routers
+from .views import TaxListView
+
+
 urlpatterns = [
 # path('/user', , name = "userConsumptionN"),
     path('signup',views.signup , name = "signup"),
     path('login',views.login , name = "login"),
     path('addmoney',views.paytmCall , name = "addmoney"),
+    path('transactions',TaxListView.as_view() , name = "transactions"),
 
 ]

@@ -5,6 +5,12 @@ from django.contrib.auth import authenticate
 from django.utils import timezone
 from django.http import JsonResponse
 import random
+from .serializers import TaxSerializer
+from rest_framework.generics import ListAPIView
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework.parsers import JSONParser
+from rest_framework.decorators import api_view
 
 
 # Create your views here.
@@ -83,4 +89,7 @@ def paytmCall(request):
         transaction.save()
         return JsonResponse({'result':1})
 
-    
+class TaxListView(ListAPIView):
+    queryset = Tax.objects.all()
+    serializer_class = TaxSerializer
+   

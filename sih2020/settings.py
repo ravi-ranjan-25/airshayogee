@@ -34,6 +34,7 @@ ALLOWED_HOSTS = ['airsahyog.herokuapp.com','localhost']
 
 INSTALLED_APPS = [
     'cab',
+    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -122,5 +123,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-
+TEMPLATE_DIRS = (
+                    os.path.join(os.path.dirname(__file__),'templates'),
+)
 django_heroku.settings(locals())
