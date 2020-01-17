@@ -34,6 +34,7 @@ ALLOWED_HOSTS = ['airsahyog.herokuapp.com','localhost']
 
 INSTALLED_APPS = [
     'cab',
+    'airline',
     'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',

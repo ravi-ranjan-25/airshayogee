@@ -15,10 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from airline import views
+from rest_framework import routers
+from .views import findFlights
+# from .views import ListView
+
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('cab/',include('cab.urls')), 
-    path('airline/',include('airline.urls')), 
+# path('/user', , name = "userConsumptionN"),
+    path('addairline',views.addAirline , name = "addairline"),
+    path('addprice',views.addPrice , name = "addprice"),
+    path('findflights',views.findFlights , name = "addprie"),
 
 ]
