@@ -49,17 +49,17 @@ def findFlights(request):
     
     air = price.objects.filter(route=Route ,date = Date)
 
-    serial = findSerializer(air)
-    # print(air)
-    # c = 0
-    # dict = {}
-    # for a in air:
-        
-    #     dict.update(serial.data)
-    #     c += 1
     
-    print(serial.data)
-    return JsonResponse({'result':serial.data})
+    print(air)
+    c = 0
+    dict = {}
+    for a in air:
+        
+        dict.update(serial.data)
+        c += 1
+    
+    print(dict)
+    return JsonResponse({'result':dict})
     
 def orderCallBack(request):
     UserNane = request.GET.get('username')
