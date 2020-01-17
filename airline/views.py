@@ -47,16 +47,16 @@ def findFlights(request):
     Route = request.GET.get('route')
     Date = request.GET.get('date')
     
-    air = price.objects.get(route=Route ,date = Date)
+    air = price.objects.filter(route=Route ,date = Date)
 
-    
-    print(air)
-    c = 0
-    dict = {}
-    for a in air:
-        serial = findSerializer(a)
-        dict.update(serial.data)
-        c += 1
+    serial = findSerializer(air)
+    # print(air)
+    # c = 0
+    # dict = {}
+    # for a in air:
+        
+    #     dict.update(serial.data)
+    #     c += 1
     
 
     return JsonResponse({'result':dict})
