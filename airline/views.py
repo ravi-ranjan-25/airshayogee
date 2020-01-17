@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from airline.models import airline,price,order
+from cab.models import Tax
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.utils import timezone
@@ -48,9 +49,34 @@ def findFlights(request):
     
     air = price.objects.get(route=Route ,date = Date)
 
-    print(air.date)
-
+    
+    print(air)
     serial = findSerializer(air)
     
+
     return JsonResponse({'result':serial.data})
     
+def orderCallBack(request):
+    UserNane = request.GET.get('username')
+    Amount = request.GET.get('TXN_AMOUNT')
+    # Route = request.GET.get('route')
+    flightId= request.GET.get('flightid')
+    Date = request.GET.get('date')
+    
+
+    u = User.objects.get(username=UserNane)
+
+    complaint = random.randint(100,999) + random.randint(9999,10000) + u.pk
+    
+    txn = "TXN25"+str(complaint)
+        
+
+    transaction = Tax(user=u,amount = Amount, txnid = txn,credit = True)
+    airid = airline.objects.filter(airlineid=flightId)
+    print(airid)
+    a = order(user = u,txnid = txn,amount = Amount,Airline =airid[0],date = Date)
+
+    a.save()
+    transaction.save()
+
+    return JsonResponse({'result':1})
