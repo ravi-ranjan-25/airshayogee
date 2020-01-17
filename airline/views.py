@@ -51,10 +51,15 @@ def findFlights(request):
 
     
     print(air)
-    serial = findSerializer(air)
+    c = 0
+    dict = {}
+    for a in air
+        serial = findSerializer(a)
+        dict.update(c:serial.data)
+        c += 1
     
 
-    return JsonResponse({'result':serial.data})
+    return JsonResponse({'result':dict})
     
 def orderCallBack(request):
     UserNane = request.GET.get('username')
