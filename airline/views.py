@@ -54,11 +54,11 @@ def findFlights(request):
     c = 0
     dict = {}
     for a in air:
-        
+        serial = findSerializer(a)
         dict.update(serial.data)
         c += 1
     
-    print(dict)
+
     return JsonResponse({'result':dict})
     
 def orderCallBack(request):
