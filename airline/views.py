@@ -55,7 +55,7 @@ def findFlights(request):
     list = []
     for a in air:
         serial = findSerializer(a)
-        list[c] = serial.data
+        list.append(serial.data)
         c = c + 1
 
     return JsonResponse({'result':list})
