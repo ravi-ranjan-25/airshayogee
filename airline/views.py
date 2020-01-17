@@ -58,8 +58,8 @@ def findFlights(request):
     #     dict.update(serial.data)
     #     c += 1
     
-
-    return JsonResponse({'result':dict})
+    print(serial.data)
+    return JsonResponse({'result':serial.data})
     
 def orderCallBack(request):
     UserNane = request.GET.get('username')
