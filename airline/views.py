@@ -52,13 +52,13 @@ def findFlights(request):
     print(air)
     print(air)
     c = 0
-    dict = {}
+    list = []
     for a in air:
         serial = findSerializer(a)
-        dict[c] = serial.data
+        list[c] = serial.data
         c = c + 1
 
-    return JsonResponse({'result':dict})
+    return JsonResponse({'result':list})
     
 def orderCallBack(request):
     UserNane = request.GET.get('username')
