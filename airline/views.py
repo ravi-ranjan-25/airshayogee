@@ -56,8 +56,9 @@ def findFlights(request):
     for a in air:
         serial = findSerializer(a)
         dict.update(serial.data)
+        
         c += 1
-    
+    print(dict)
 
     return JsonResponse({'result':dict})
     
