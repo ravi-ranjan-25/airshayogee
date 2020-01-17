@@ -49,14 +49,14 @@ def findFlights(request):
     
     air = price.objects.filter(route=Route ,date = Date)
 
-    
+    print(air)
     print(air)
     c = 0
     dict = {}
     for a in air:
         serial = findSerializer(a)
         dict[c] = serial.data
-        
+        c = c + 1
 
     return JsonResponse({'result':dict})
     
