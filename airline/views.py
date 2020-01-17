@@ -53,9 +53,9 @@ def findFlights(request):
     print(air)
     c = 0
     dict = {}
-    for a in air
+    for a in air:
         serial = findSerializer(a)
-        dict.update(c:serial.data)
+        dict.update(serial.data)
         c += 1
     
 
