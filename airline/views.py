@@ -82,7 +82,7 @@ def orderCallBack(request):
     wall.amount = wall.amount - float(Amount) 
     a = order(user = u,txnid = txn,amount = Amount,Airline =airid[0],date = Date)
 
-    
+    wall.save()
     a.save()
     transaction.save()
 
