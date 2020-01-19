@@ -79,7 +79,7 @@ def orderCallBack(request):
     airid = airline.objects.filter(airlineid=flightId)
     wall = wallet.objects.get(user=u)
     print(airid)
-    wall.amount = wall.amount - Amount 
+    wall.amount = wall.amount - float(Amount) 
     a = order(user = u,txnid = txn,amount = Amount,Airline =airid[0],date = Date)
 
     wall.save()
