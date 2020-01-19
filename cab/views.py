@@ -84,7 +84,7 @@ def paytmCall(request):
         wall1.amount = wall1.amount + float(am)
         transaction.user = user1
 
-        transaction.credit = True
+        transaction.credit = False
         wall1.save()
         transaction.save()
         return JsonResponse({'result':1})
