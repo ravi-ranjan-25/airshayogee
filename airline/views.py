@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from airline.models import airline,price,order
-from cab.models import Tax
+from cab.models import Tax,wallet
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.utils import timezone
@@ -77,9 +77,12 @@ def orderCallBack(request):
 
     transaction = Tax(user=u,amount = Amount, txnid = txn,credit = True)
     airid = airline.objects.filter(airlineid=flightId)
+    wall = wallet.objects.get(user=u)
     print(airid)
+    wall.amount = wall.amount - Amount 
     a = order(user = u,txnid = txn,amount = Amount,Airline =airid[0],date = Date)
 
+    wall.save()
     a.save()
     transaction.save()
 
