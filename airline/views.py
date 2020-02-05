@@ -28,7 +28,8 @@ def addAirline(request):
 
     a.save()
 
-    return JsonResponse({'result':1})
+    return JsonResponse({'result':1})admin.site.register(CabOrder)
+
 
 def addPrice(request): 
 
@@ -77,7 +78,7 @@ def orderCallBack(request):
     
     txn = "TXN25"+str(complaint)
         
-    if(paytm == False):
+    if(paytm == 'no'):
         transaction = Tax(user=u,amount = Amount, txnid = txn,credit = True)
         airid = airline.objects.filter(airlineid=flightId)
         wall = wallet.objects.get(user=u)
