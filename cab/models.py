@@ -51,8 +51,9 @@ class CabOrder(models.Model):
     pickuplong = models.CharField(max_length=256,default = '0.00')
     pickuplat = models.CharField(max_length=256,default = '0.00')
     cab = models.ForeignKey(cabDetail,on_delete = models.CASCADE,blank=True,null=True)
+    amount = models.FloatField(max_length=10,default=0)
     time = models.DateTimeField(default = timezone.now())
-
+    
 
     def __str__(self):
         return self.longitude

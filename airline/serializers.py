@@ -40,3 +40,4 @@ class CabSerializer(serializers.Serializer):
     latitude = serializers.CharField()
     pickuplat = serializers.CharField()
     pickuplong = serializers.CharField()
+    amount = serializers.FloatField()

@@ -102,12 +102,37 @@ def orderCab(request):
     lati = request.GET.get('latitude')
     Pickupl = request.GET.get('pickuplong')     
     Pickupla = request.GET.get('pickuplat')
+    Amount = request.GET.get('amount')
 
     user1 = User.objects.get(username = username1)
+    o = order.objects.get(txnid = Txn)
+
+    z = CabOrder.objects.filter(orderid = o)
     
+    complaint = random.randint(100,999) + random.randint(9999,10000) + user1.pk
+
+    txn = "TXN25"+str(complaint)
+        
+
+    if len(z) > 0:
+        return JsonResponse({'result':0,'message':'Cab already booked'})        
+
+
+
+
+    transaction = Tax(user=user1,amount = Amount, txnid = txn,credit = True)
     o = order.objects.get(txnid = Txn)
 
     cr = CabOrder(user = user1,orderid=o,longitude=longi,latitude=lati,pickuplong=Pickupl,pickuplat=Pickupla)    
+    wall = wallet.objects.get(user=user1)
+        
+    wall.amount = wall.amount - float(Amount) 
+   
+    wall.save()
+#     a.save()
+    transaction.save()    
+
+
     
     cr.save()
     return JsonResponse({'result':1})
