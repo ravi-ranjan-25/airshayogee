@@ -28,7 +28,7 @@ def addAirline(request):
 
     a.save()
 
-    return JsonResponse({'result':1})admin.site.register(CabOrder)
+    return JsonResponse({'result':1})
 
 
 def addPrice(request): 
