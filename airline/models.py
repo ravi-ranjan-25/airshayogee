@@ -34,7 +34,9 @@ class order(models.Model):
     amount = models.FloatField(max_length=10)
     Airline = models.ForeignKey(airline,on_delete = models.CASCADE)
     date = models.CharField(unique = False,max_length=256)
+    paytm = models.BooleanField(default=False)
     droplocation = models.CharField(unique=False,default='no',max_length=256)
+    time = models.DateTimeField(default = timezone.now())
 
     def __str__(self):
         return self.txnid
