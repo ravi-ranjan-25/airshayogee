@@ -28,16 +28,16 @@ class UserSerializer(serializers.Serializer):
     first_name = serializers.CharField()
     last_name = serializers.CharField()
     
-class CabSerializer(serializers.Serializer):
+class CabDetailSerializer(serializers.Serializer):
     numb = serializers.CharField()
     CabModel = serializers.CharField()
 
 class CabSerializer(serializers.Serializer):
     user = UserSerializer()
     orderid=orderSerializer()
-    cab = CabSerializer()
+    cab = CabDetailSerializer()
     longitude = serializers.CharField()
     latitude = serializers.CharField()
     pickuplat = serializers.CharField()
     pickuplong = serializers.CharField()
-    amount = serializers.FloatField()
+    amount = serializers.Field()

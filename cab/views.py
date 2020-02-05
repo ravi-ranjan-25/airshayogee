@@ -209,3 +209,21 @@ def transactionsnew(request):
                 list.append(serial.data)
         
         return JsonResponse({'result':list,'balance':wall.amount})
+
+def cabTransactions(request):
+        username1 = request.GET.get('username')
+        user1 = User.objects.get(username = username1)
+
+        CabD = cabDetail.objects.get(user = user1)
+
+        t = CabOrder.objects.filter(user=user1)
+        
+
+        list = []
+    
+        for C in t:
+                serial = CabSerializer(C)
+                list.append(serial.data)
+        
+        return JsonResponse({'result':list,'balance':wall.amount})
+
