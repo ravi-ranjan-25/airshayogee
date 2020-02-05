@@ -33,10 +33,15 @@ class Tax(models.Model):
         return self.txnid
 
 class CabOrder(models.Model):
+    user = models.ForeignKey(User,on_delete = models.CASCADE)
     orderid = models.ForeignKey(order,on_delete = models.CASCADE)
     longitude = models.CharField(max_length=256)
     latitude = models.CharField(max_length=256)
+    pickuplong = models.CharField(max_length=256)
+    pickuplat = models.CharField(max_length=256)
+    
     time = models.DateTimeField(default = timezone.now())
+
 
     def __str__(self):
         return self.longitude

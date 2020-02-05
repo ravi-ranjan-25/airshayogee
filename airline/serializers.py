@@ -15,3 +15,10 @@ class findSerializer(serializers.Serializer):
     seats= serializers.IntegerField()
     route = serializers.CharField()
     date = serializers.DateField()
+
+class orderSerializer(serializers.Serializer):
+    txnid = serializers.CharField()
+    amount = serializers.FloatField()
+    Airline = airlineSerializer()
+    date = serializers.CharField()
+        

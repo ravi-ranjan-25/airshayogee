@@ -27,5 +27,6 @@ urlpatterns = [
     path('addprice',views.addPrice , name = "addprice"),
     path('findflights',views.findFlights , name = "addprie"),
     path('booking',views.orderCallBack , name = "booking"),
+    path('show',views.showorders , name = "booking"),
 
 ]

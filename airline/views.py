@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate
 from django.utils import timezone
 from django.http import JsonResponse
 import random
-from .serializers import findSerializer
+from .serializers import findSerializer,orderSerializer
 from rest_framework.generics import ListAPIView
 from rest_framework import status
 from rest_framework.response import Response
@@ -88,7 +88,27 @@ def orderCallBack(request):
         wall.save()
         a.save()
         transaction.save()
-    
+    else:
+        transaction = Tax(user=u,amount = Amount, txnid = txn,credit = True)
+        airid = airline.objects.filter(airlineid=flightId)
+        a = order(user = u,txnid = txn,amount = Amount,Airline =airid[0],date = Date)
+        a.save()
+        transaction.save()   
 
 
     return JsonResponse({'result':1})
+    
+def showorders(request):
+    UserNane = request.GET.get('username')
+
+    u = User.objects.get(username=UserNane)
+
+    o = order.objects.filter(user=u)
+    list = []
+
+    for O in o:
+        serial = orderSerializer(O)
+        
+        list.append(serial.data)
+            
+    return JsonResponse({'result':list})

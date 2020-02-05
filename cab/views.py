@@ -1,5 +1,7 @@
 from django.shortcuts import render
-from cab.models import userMob,Tax,wallet
+from cab.models import userMob,Tax,wallet,CabOrder
+from airline.models import airline,price,order
+
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.utils import timezone
@@ -93,3 +95,18 @@ class TaxListView(ListAPIView):
     queryset = Tax.objects.all()
     serializer_class = TaxSerializer
    
+def orderCab(request):
+    Txn = request.GET.get('txnid')   
+    username1 = request.GET.get('username')
+    longi = request.GET.get('longitude')
+    latitude = request.GET.get('latitude')
+    Pickupl = request.GET.get('pickuplong')     
+    Pickupla = request.GET.get('pickuplat')
+
+    user1 = User.objects.get(username = username1)
+    
+    o = order.objects.get(txnid = Txn)
+
+    cr = CabOrder(user = u,order=o,longitude=longi,latitude=lati,pickuplong=Pickupl,pickuplat=Pickupla)    
+    
+    cr.save()
