@@ -217,7 +217,8 @@ def cabTransactions(request):
         CabD = cabDetail.objects.get(user = user1)
 
         t = CabOrder.objects.filter(user=user1)
-        
+        wall = wallet.objects.get(user=user1)
+
 
         list = []
     
