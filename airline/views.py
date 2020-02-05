@@ -78,7 +78,7 @@ def orderCallBack(request):
     
     txn = "TXN25"+str(complaint)
         
-    if(paytm == 'no'):
+    if(Paytm == 'no'):
         transaction = Tax(user=u,amount = Amount, txnid = txn,credit = True)
         airid = airline.objects.filter(airlineid=flightId)
         wall = wallet.objects.get(user=u)
