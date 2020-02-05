@@ -34,10 +34,10 @@ class CabDetailSerializer(serializers.Serializer):
 
 class CabSerializer(serializers.Serializer):
     user = UserSerializer()
-    orderid=orderSerializer()
+    orderid = orderSerializer()
     cab = CabDetailSerializer()
     longitude = serializers.CharField()
     latitude = serializers.CharField()
     pickuplat = serializers.CharField()
     pickuplong = serializers.CharField()
-    amount = serializers.Field()
+    amount = serializers.CharField()
