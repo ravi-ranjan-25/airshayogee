@@ -17,3 +17,4 @@ class TranSerializer(serializers.Serializer):
     txnid = serializers.CharField()
     amount = serializers.FloatField()
     credit = serializers.BooleanField()
+    time = serializers.DateTimeField()
