@@ -69,7 +69,7 @@ def orderCallBack(request):
     # Route = request.GET.get('route')
     flightId= request.GET.get('flightid')
     Date = request.GET.get('date')
-    
+    Paytm = request.Get.get('paytm')
 
     u = User.objects.get(username=UserNane)
 
@@ -77,16 +77,18 @@ def orderCallBack(request):
     
     txn = "TXN25"+str(complaint)
         
+    if(paytm == False):
+        transaction = Tax(user=u,amount = Amount, txnid = txn,credit = True)
+        airid = airline.objects.filter(airlineid=flightId)
+        wall = wallet.objects.get(user=u)
+        print(airid)
+        wall.amount = wall.amount - float(Amount) 
+        a = order(user = u,txnid = txn,amount = Amount,Airline =airid[0],date = Date)
 
-    transaction = Tax(user=u,amount = Amount, txnid = txn,credit = True)
-    airid = airline.objects.filter(airlineid=flightId)
-    wall = wallet.objects.get(user=u)
-    print(airid)
-    wall.amount = wall.amount - float(Amount) 
-    a = order(user = u,txnid = txn,amount = Amount,Airline =airid[0],date = Date)
+        wall.save()
+        a.save()
+        transaction.save()
+    
 
-    wall.save()
-    a.save()
-    transaction.save()
 
     return JsonResponse({'result':1})
