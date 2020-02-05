@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from airline.models import price,airline
+from cab.models import cabDetail,CabOrder
 
 class airlineSerializer(serializers.Serializer):
     airlineid = serializers.CharField()
@@ -21,4 +22,21 @@ class orderSerializer(serializers.Serializer):
     amount = serializers.FloatField()
     Airline = airlineSerializer()
     date = serializers.CharField()
-        
+
+class UserSerializer(serializers.Serializer):
+    username = serializers.CharField()
+    first_name = serializers.CharField()
+    last_name = serializers.CharField()
+    
+class CabSerializer(serializers.Serializer):
+    numb = serializers.CharField()
+    CabModel = serializers.CharField()
+
+class CabSerializer(serializers.Serializer):
+    user = UserSerializer()
+    orderid=orderSerializer()
+    cab = CabSerializer()
+    longitude = serializers.CharField()
+    latitude = serializers.CharField()
+    pickuplat = serializers.CharField()
+    pickuplong = serializers.CharField()

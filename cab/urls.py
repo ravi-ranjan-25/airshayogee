@@ -26,5 +26,9 @@ urlpatterns = [
     path('login',views.login , name = "login"),
     path('addmoney',views.paytmCall , name = "addmoney"),
     path('transactions',TaxListView.as_view() , name = "transactions"),
+    path('ordercab',views.orderCab , name = "booking"),
+    path('showusercab',views.showUserCab , name = "booking"),
+    path('showdriver',views.showDriver , name = "booking"),
+    path('assigncab',views.assigncab , name = "booking"),
 
 ]

@@ -100,15 +100,17 @@ def orderCallBack(request):
     
 def showorders(request):
     UserNane = request.GET.get('username')
-
+    Cab = request.GET.get('cab')
     u = User.objects.get(username=UserNane)
 
+
     o = order.objects.filter(user=u)
+
     list = []
 
     for O in o:
         serial = orderSerializer(O)
-        
         list.append(serial.data)
             
     return JsonResponse({'result':list})
+

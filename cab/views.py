@@ -1,13 +1,13 @@
 from django.shortcuts import render
-from cab.models import userMob,Tax,wallet,CabOrder
+from cab.models import userMob,Tax,wallet,CabOrder,cabDetail
 from airline.models import airline,price,order
-
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.utils import timezone
 from django.http import JsonResponse
 import random
 from .serializers import TaxSerializer
+from airline.serializers import CabSerializer
 from rest_framework.generics import ListAPIView
 from rest_framework import status
 from rest_framework.response import Response
@@ -99,7 +99,7 @@ def orderCab(request):
     Txn = request.GET.get('txnid')   
     username1 = request.GET.get('username')
     longi = request.GET.get('longitude')
-    latitude = request.GET.get('latitude')
+    lati = request.GET.get('latitude')
     Pickupl = request.GET.get('pickuplong')     
     Pickupla = request.GET.get('pickuplat')
 
@@ -107,6 +107,53 @@ def orderCab(request):
     
     o = order.objects.get(txnid = Txn)
 
-    cr = CabOrder(user = u,order=o,longitude=longi,latitude=lati,pickuplong=Pickupl,pickuplat=Pickupla)    
+    cr = CabOrder(user = user1,orderid=o,longitude=longi,latitude=lati,pickuplong=Pickupl,pickuplat=Pickupla)    
     
     cr.save()
+
+def showUserCab(request):    
+    username1 = request.GET.get('username')
+    user1 = User.objects.get(username = username1)
+
+        
+    c = CabOrder.objects.filter(user = user1)
+
+    
+    list = []
+    
+    for C in c:
+        serial = CabSerializer(C)
+
+        list.append(serial.data)
+
+    return JsonResponse({'result':list})
+
+def showDriver(request):    
+    
+        
+    c = CabOrder.objects.filter(cab = None)
+
+    
+    list = []
+    
+    for C in c:
+        serial = CabSerializer(C)
+
+        list.append(serial.data)
+
+    return JsonResponse({'result':list})
+
+def assigncab(request):
+    username1 = request.GET.get('username')
+    Txn = request.GET.get('txnid')   
+
+    user1 = User.objects.get(username = username1)
+    cabD = cabDetail.objects.get(user = user1)
+    o = order.objects.get(txnid = Txn)    
+    c = CabOrder.objects.get(orderid = o)
+
+
+    c.cab = cabD
+    c.save()
+
+    return JsonResponse({'result':1})
