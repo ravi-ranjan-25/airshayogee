@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate
 from django.utils import timezone
 from django.http import JsonResponse
 import random
-from .serializers import TaxSerializer
+from .serializers import TaxSerializer,TranSerializer
 from airline.serializers import CabSerializer
 from rest_framework.generics import ListAPIView
 from rest_framework import status
@@ -123,7 +123,7 @@ def orderCab(request):
     transaction = Tax(user=user1,amount = Amount, txnid = txn,credit = True)
     o = order.objects.get(txnid = Txn)
 
-    cr = CabOrder(user = user1,orderid=o,longitude=longi,latitude=lati,pickuplong=Pickupl,pickuplat=Pickupla)    
+    cr = CabOrder(user = user1,orderid=o,longitude=longi,latitude=lati,pickuplong=Pickupl,pickuplat=Pickupla,amount=Amount)    
     wall = wallet.objects.get(user=user1)
         
     wall.amount = wall.amount - float(Amount) 
@@ -174,6 +174,7 @@ def assigncab(request):
     username1 = request.GET.get('username')
     Txn = request.GET.get('txnid')   
 
+
     user1 = User.objects.get(username = username1)
     cabD = cabDetail.objects.get(user = user1)
     o = order.objects.get(txnid = Txn)    
@@ -181,6 +182,30 @@ def assigncab(request):
 
 
     c.cab = cabD
+    wall = wallet.objects.get(user=user1)
+        
+    wall.amount = wall.amount + c.amount 
+   
+    wall.save()
+#   
+
+
     c.save()
 
     return JsonResponse({'result':1})
+
+def transactionsnew(request):
+        username1 = request.GET.get('username')
+        user1 = User.objects.get(username = username1)
+
+        t = Tax.objects.filter(user=user1)
+        wall = wallet.objects.get(user=user1)
+
+        list = []
+    
+        for C in t:
+                serial = TranSerializer(C)
+
+                list.append(serial.data)
+        
+        return JsonResponse({'result':list,'balance':wall.amount})

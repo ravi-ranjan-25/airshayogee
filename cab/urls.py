@@ -30,5 +30,6 @@ urlpatterns = [
     path('showusercab',views.showUserCab , name = "booking"),
     path('showdriver',views.showDriver , name = "booking"),
     path('assigncab',views.assigncab , name = "booking"),
+    path('newtrans',views.transactionsnew , name = "booking"),
 
 ]

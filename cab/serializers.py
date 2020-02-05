@@ -12,3 +12,8 @@ class TaxSerializer(serializers.ModelSerializer):
     def Complain(self,wall): 
          user1 = wall.user.username
          return user1
+
+class TranSerializer(serializers.Serializer):
+    txnid = serializers.CharField()
+    amount = serializers.FloatField()
+    credit = serializers.BooleanField()
