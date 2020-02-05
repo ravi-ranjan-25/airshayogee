@@ -110,6 +110,8 @@ def orderCab(request):
     cr = CabOrder(user = user1,orderid=o,longitude=longi,latitude=lati,pickuplong=Pickupl,pickuplat=Pickupla)    
     
     cr.save()
+    return JsonResponse({'result':1})
+
 
 def showUserCab(request):    
     username1 = request.GET.get('username')
