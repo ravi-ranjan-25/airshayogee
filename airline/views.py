@@ -70,7 +70,7 @@ def orderCallBack(request):
     # Route = request.GET.get('route')
     flightId= request.GET.get('flightid')
     Date = request.GET.get('date')
-    Paytm = request.Get.get('paytm')
+    Paytm = request.GET.get('paytm')
 
     u = User.objects.get(username=UserNane)
 
